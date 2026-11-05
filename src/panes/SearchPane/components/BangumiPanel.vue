@@ -88,7 +88,7 @@ const currentTabIndex = ref<number>(0)
 
 const tabNames = computed<string[]>(() => {
   const sections = props.bangumiResult.info.section
-  if (sections === null) {
+  if (sections == null) {
     return ['正片']
   }
   return ['正片', ...sections.map((section) => section.title)]
@@ -99,7 +99,7 @@ const showingEpisodes = computed<EpInBangumi[]>(() => {
     return props.bangumiResult.info.episodes
   }
   const sections = props.bangumiResult.info.section
-  if (sections === null || currentTabIndex.value - 1 >= sections.length) {
+  if (sections == null || currentTabIndex.value - 1 >= sections.length) {
     return []
   }
   return sections[currentTabIndex.value - 1].episodes
@@ -113,7 +113,7 @@ watch(
   () => props.bangumiResult,
   async () => {
     const episode = props.bangumiResult.ep
-    if (episode === null) {
+    if (episode == null) {
       currentTabIndex.value = 0
       selectedIds.value.clear()
       checkedIds.value.clear()
@@ -123,7 +123,7 @@ watch(
     }
 
     const sections = props.bangumiResult.info.section
-    if (sections === null || props.bangumiResult.info.episodes.some((ep) => ep.aid === episode.aid)) {
+    if (sections == null || props.bangumiResult.info.episodes.some((ep) => ep.aid === episode.aid)) {
       currentTabIndex.value = 0
     } else {
       currentTabIndex.value = sections.findIndex((s) => s.episodes.some((ep) => ep.aid === episode.aid)) + 1
@@ -157,7 +157,7 @@ async function downloadCheckedEpisodes() {
     if (ep === undefined) {
       continue
     }
-    if (ep.link_type === null) {
+    if (ep.link_type == null) {
       await downloadBangumiEpisode(ep.ep_id)
       playCardDownloadAnimation(ep.aid)
     } else {

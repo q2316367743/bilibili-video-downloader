@@ -3,7 +3,7 @@ import { commands, QrcodeData, QrcodeStatus } from '../bindings.ts'
 import { ref, watch } from 'vue'
 import { NDialog, NModal, NQrCode, NTabPane, NTabs, useMessage } from 'naive-ui'
 import { useStore } from '../store.ts'
-import icon from '../../src-tauri/icons/128x128.png'
+import icon from '../../src-dashou/assets/icon.png'
 import FloatLabelInput from '../components/FloatLabelInput.vue'
 
 const store = useStore()

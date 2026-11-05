@@ -4,32 +4,14 @@ import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// @ts-expect-error process is a nodejs global
-const host = process.env.TAURI_DEV_HOST
-
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig({
+  // 插件页面通过 plugin://<id>/ui/index.html 加载，资源必须是相对路径
+  base: './',
   plugins: [vue(), UnoCSS(), vueJsx({}), vueDevTools()],
-
-  // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
-  //
-  // 1. prevent vite from obscuring rust errors
-  clearScreen: false,
-  // 2. tauri expects a fixed port, fail if that port is not available
   server: {
-    port: 5005,
+    port: 5176,
     strictPort: true,
-    host: host || false,
-    hmr: host
-      ? {
-          protocol: 'ws',
-          host,
-          port: 1421,
-        }
-      : undefined,
-    watch: {
-      // 3. tell vite to ignore watching `src-tauri`
-      ignored: ['**/src-tauri/**'],
-    },
+    host: false,
   },
-}))
+})

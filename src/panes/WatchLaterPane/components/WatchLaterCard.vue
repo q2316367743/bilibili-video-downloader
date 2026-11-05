@@ -23,7 +23,7 @@ const rootDivRef = useTemplateRef('rootDivRef')
 const downloadButtonRef = useTemplateRef('downloadButtonRef')
 
 const openInBrowserHref = computed<string>(() => {
-  if (props.media.redirect_url === null) {
+  if (props.media.redirect_url == null) {
     return `https://www.bilibili.com/video/${props.media.bvid}/`
   } else {
     const epId = extractEpId(props.media.redirect_url)
@@ -61,7 +61,7 @@ function searchInSearchPane() {
     return
   }
 
-  if (props.media.redirect_url === null) {
+  if (props.media.redirect_url == null) {
     props.search(props.media.bvid, 'Normal')
   } else {
     const epId = extractEpId(props.media.redirect_url)
@@ -76,14 +76,14 @@ defineExpose({ playDownloadAnimation, media: props.media })
   <div
     class="flex flex-col w-200px relative p-3 rounded-lg"
     @contextmenu="handleContextMenu?.(media)"
-    :title="media.redirect_url !== null ? '下载请点击左下角放大镜按钮' : undefined"
+    :title="media.redirect_url != null ? '下载请点击左下角放大镜按钮' : undefined"
     ref="rootDivRef">
     <SimpleCheckbox
-      v-if="media.redirect_url === null && handleCheckboxClick !== undefined && checkboxChecked !== undefined"
+      v-if="media.redirect_url == null && handleCheckboxClick !== undefined && checkboxChecked !== undefined"
       class="absolute top-6 left-6 z-1 backdrop-blur-2"
       :checked="checkboxChecked(media)"
       :on-click="() => handleCheckboxClick?.(media)" />
-    <div v-if="media.redirect_url !== null" class="absolute top-6 right-6 z-1 bg-[#ff6699] text-white px-1 rounded">
+    <div v-if="media.redirect_url != null" class="absolute top-6 right-6 z-1 bg-[#ff6699] text-white px-1 rounded">
       番剧
     </div>
     <img

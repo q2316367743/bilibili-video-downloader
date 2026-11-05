@@ -1,3 +1,0 @@
-[workspace]
-members = ["plugin-api", "plugin-sdk"]
-resolver = "3"

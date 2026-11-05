@@ -25,10 +25,8 @@ import {
   useTemplateRef,
   watch,
 } from 'vue'
-import { appDataDir, basename } from '@tauri-apps/api/path'
-import { path } from '@tauri-apps/api'
 import { useStore } from '../store.ts'
-import { open } from '@tauri-apps/plugin-dialog'
+import { open } from '@dashou/api/dialog'
 import { VList } from 'virtua/vue'
 import { PhArrowDown, PhArrowUp } from '@phosphor-icons/vue'
 
@@ -248,7 +246,7 @@ function clearLiveLogRecords() {
 }
 
 async function showLogsDirInFileManager() {
-  const logsDir = await path.join(await appDataDir(), '日志')
+  const { logs_dir: logsDir } = await commands.getPaths()
   const result = await commands.showPathInFileManager(logsDir)
   if (result.status === 'error') {
     console.error(result.error)
@@ -256,14 +254,15 @@ async function showLogsDirInFileManager() {
 }
 
 async function openLogFile() {
-  const logsDir = await path.join(await appDataDir(), '日志')
+  const { logs_dir: logsDir } = await commands.getPaths()
 
-  const selectedFilePath = await open({
+  const selectedFilePaths = await open({
     defaultPath: logsDir,
     filters: [{ name: 'Log Files', extensions: ['log'] }],
   })
+  const selectedFilePath = selectedFilePaths[0]
 
-  if (selectedFilePath === null) {
+  if (selectedFilePath === undefined) {
     return
   }
 
@@ -274,7 +273,7 @@ async function openLogFile() {
   }
 
   fileLogRecords.value = result.data.map(logMetadataToLogRecord)
-  currentFileName.value = await basename(selectedFilePath)
+  currentFileName.value = selectedFilePath.split(/[\\/]/).pop() ?? ''
 
   viewMode.value = 'file'
 }

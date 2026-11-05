@@ -357,7 +357,7 @@ defineExpose({ search })
     </n-input-group>
     <div class="overflow-auto h-full" v-if="searchResult !== undefined">
       <NormalSeasonPanel
-        v-if="'Normal' in searchResult && searchResult.Normal.ugc_season !== null"
+        v-if="'Normal' in searchResult && searchResult.Normal.ugc_season != null"
         :normal-result="searchResult.Normal"
         :ugc-season="searchResult.Normal.ugc_season" />
       <NormalSinglePanel v-else-if="'Normal' in searchResult" :normal-result="searchResult.Normal" />

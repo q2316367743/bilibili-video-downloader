@@ -14,7 +14,7 @@ import {
   PhPlayCircle,
 } from '@phosphor-icons/vue'
 import AboutDialog from './dialogs/AboutDialog.vue'
-import { platform } from '@tauri-apps/plugin-os'
+import { platform } from '@dashou/api'
 import TitleBar from './components/TitleBar.vue'
 import SettingsDialog from './dialogs/SettingsDialog/SettingsDialog.vue'
 import SearchPane from './panes/SearchPane/SearchPane.vue'

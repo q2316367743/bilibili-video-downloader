@@ -1,0 +1,68 @@
+{
+  "$schema": "../node_modules/@dashou/cli/schema/plugin-1.json",
+  "schemaVersion": 1,
+  "id": "com.dashou.bilibili",
+  "name": "哔哩哔哩视频下载器",
+  "version": "1.0.0",
+  "description": "B站视频下载器：普通视频、番剧、课程、收藏夹、历史记录、稍后再看，支持 nfo 刮削、字幕、弹幕与章节标记。",
+  "author": { "name": "lanyeeee" },
+  "homepage": "https://github.com/lanyeeee/bilibili-video-downloader",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "csp": "img-src 'self' plugin: data: https:",
+  "core": "core.mjs",
+  "activation": "onCommand",
+  "resident": false,
+  "windows": [
+    {
+      "label": "main",
+      "title": "哔哩哔哩视频下载器",
+      "url": "ui/index.html",
+      "width": 1200,
+      "height": 800,
+      "minWidth": 980,
+      "minHeight": 640,
+      "center": true,
+      "resizable": true,
+      "decorations": false,
+      "backgroundColor": "#F2F2F2"
+    }
+  ],
+  "commands": [
+    {
+      "id": "open",
+      "title": "哔哩哔哩视频下载器",
+      "description": "下载 B 站视频、番剧、课程，支持弹幕、字幕与 nfo 刮削",
+      "keywords": ["bilibili", "哔哩哔哩", "b站", "视频下载", "番剧下载", "弹幕", "b站下载器"],
+      "mode": "window",
+      "window": "main"
+    }
+  ],
+  "capabilities": [
+    {
+      "identifier": "main-ui",
+      "targets": ["main"],
+      "permissions": [
+        "core:event:allow-listen",
+        "core:window:allow-close",
+        "core:window:allow-minimize",
+        "core:window:allow-toggle-maximize",
+        "core:window:allow-is-maximized",
+        "core:window:allow-set-always-on-top",
+        "dialog:allow-open",
+        "ffmpeg:default"
+      ]
+    },
+    {
+      "identifier": "core-base",
+      "targets": ["core"],
+      "permissions": ["core:event:allow-emit", "log:allow-log"]
+    }
+  ],
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:5176",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "dist"
+  }
+}

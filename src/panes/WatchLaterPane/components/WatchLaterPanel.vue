@@ -147,7 +147,7 @@ function useWatchLaterCard(
       <div class="flex flex-wrap gap-2">
         <template v-for="media in watchLaterInfo.list" :key="media.aid">
           <WatchLaterCard
-            v-if="media.redirect_url === null"
+            v-if="media.redirect_url == null"
             ref="watchLaterCardRefs"
             :data-key="media.aid"
             :class="[

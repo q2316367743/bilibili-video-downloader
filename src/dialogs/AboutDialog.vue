@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { getVersion } from '@tauri-apps/api/app'
 import { ref, onMounted } from 'vue'
-import icon from '../../src-tauri/icons/128x128.png'
+import icon from '../../src-dashou/assets/icon.png'
+import { commands } from '../bindings.ts'
 import { NA, NDialog, NModal } from 'naive-ui'
 
 const showing = defineModel<boolean>('showing', { required: true })
 const version = ref('')
 
 onMounted(async () => {
-  version.value = await getVersion()
+  const info = await commands.getPluginInfo()
+  version.value = info.version
 })
 </script>
 

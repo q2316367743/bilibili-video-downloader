@@ -90,7 +90,7 @@ const episodeInfo = computed<EpisodeInfo>(() => {
       bvid: episode.bvid ?? undefined,
       epId: episode.ep_id,
       href:
-        episode.link_type === null
+        episode.link_type == null
           ? `https://www.bilibili.com/bangumi/play/ep${episode.ep_id}`
           : `https://www.bilibili.com/video/${extractBvid(episode.link)}/`,
       cover: episode.cover,

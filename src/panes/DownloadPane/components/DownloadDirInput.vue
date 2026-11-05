@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PhFolderOpen } from '@phosphor-icons/vue'
 import { commands } from '../../../bindings.ts'
-import { open } from '@tauri-apps/plugin-dialog'
+import { open } from '@dashou/api/dialog'
 import { useStore } from '../../../store.ts'
 import { NButton, NIcon, NInput, NInputGroup, NInputGroupLabel } from 'naive-ui'
 
@@ -23,8 +23,9 @@ async function selectDownloadDir() {
     return
   }
 
-  const selectedDirPath = await open({ directory: true })
-  if (selectedDirPath === null) {
+  const selectedDirPaths = await open({ directory: true })
+  const selectedDirPath = selectedDirPaths[0]
+  if (selectedDirPath === undefined) {
     return
   }
 

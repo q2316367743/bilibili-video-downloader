@@ -1,5 +1,4 @@
 <script setup lang="tsx">
-import { path } from '@tauri-apps/api'
 import { commands } from '../../../bindings.ts'
 import { useStore } from '../../../store.ts'
 import {
@@ -92,8 +91,7 @@ async function showMp4InFileManager(episodeDir: string, filename: string) {
     return
   }
 
-  let mp4filename = `${filename}.mp4`
-  const mp4Path = await path.join(episodeDir, mp4filename)
+  const mp4Path = `${episodeDir}/${filename}.mp4`
 
   const result = await commands.showPathInFileManager(mp4Path)
   if (result.status === 'error') {
