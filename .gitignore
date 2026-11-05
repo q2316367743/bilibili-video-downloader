@@ -24,4 +24,6 @@ dist-ssr
 *.sw?
 
 # 搭手插件构建产物
-dashou-dist
+src-dashou/core.mjs
+src-dashou/ui/
+src-dashou/dashou-dist/

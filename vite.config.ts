@@ -13,5 +13,6 @@ export default defineConfig({
     port: 5176,
     strictPort: true,
     host: false,
+    watch: { ignored: ['**/src-dashou/dashou-dist/**', '**/src-dashou/ui/**'] },
   },
 })

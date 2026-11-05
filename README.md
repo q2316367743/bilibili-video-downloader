@@ -26,7 +26,7 @@ B 站视频下载器：普通视频、充电视频、番剧、电视剧、电影
 
 ## 📥 安装
 
-构建产物在 `dashou-dist/`：
+构建产物在 `src-dashou/dashou-dist/`：
 
 - `com.dashou.bilibili-<version>.dsp` —— 安装包
 - `com.dashou.bilibili/` —— 解包目录（用于检查包内容）
@@ -40,16 +40,17 @@ B 站视频下载器：普通视频、充电视频、番剧、电视剧、电影
 ```bash
 pnpm install
 pnpm build            # 类型检查 + 前端构建
-pnpm plugin:build     # 打包成 dashou-dist/com.dashou.bilibili-<version>.dsp
+pnpm plugin:build     # 打包成 src-dashou/dashou-dist/com.dashou.bilibili-<version>.dsp
 ```
 
 ## 🧑‍💻 开发
 
 ```bash
-pnpm dev              # Vite dev server（http://localhost:5176）
+pnpm dev              # 只起 Vite dev server（http://localhost:5176）
+pnpm plugin:dev       # 起 Vite + 把 core.mjs 打到 src-dashou/ 并 watch
 ```
 
-在搭手「开发者工具 → 添加项目」选择本工程的 `src-dashou/`，点「开发 / 打开」。修改页面由 dev server 热更新；修改 `src-dashou/*.ts`（core）后点「重新加载」。
+`pnpm plugin:dev` 后，在搭手「开发者工具 → 添加项目」选择本工程的 `src-dashou/`，点「开发 / 打开」。修改页面由 dev server 热更新；修改 `src-dashou/*.ts`（core）会自动重建，点「重新加载」生效。
 
 ## 📂 结构
 
@@ -67,8 +68,9 @@ pnpm dev              # Vite dev server（http://localhost:5176）
 │   ├── danmaku.ts          # 弹幕 XML / ASS
 │   ├── nfo.ts              # movie / tvshow / episodedetails NFO
 │   ├── net.ts              # Node 网络层与代理
+│   ├── core.mjs            # dev 生成（gitignore）
+│   ├── dashou-dist/        # build 生成（gitignore）
 │   └── ...
-└── dashou-dist/            # 构建产物
 ```
 
 ## 🔐 权限
